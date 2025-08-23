@@ -36,6 +36,54 @@ body {
   color: white;
   border-radius: 15px;
 }
+/* Responsive Design for Mobile */
+@media (max-width: 600px) {
+  body {
+    margin-top: 10px;
+    background-size: cover;
+    padding: 0 4px;
+  }
+  #todo-container {
+    width: 98vw;
+    min-width: 0;
+    max-width: 100vw;
+    padding: 12px 4px 16px 4px;
+    border-radius: 12px;
+    font-size: 1em;
+  }
+  h1 {
+    font-size: 1.5em;
+    margin-bottom: 12px;
+  }
+  #input-box {
+    width: 60vw;
+    min-width: 120px;
+    font-size: 1em;
+    padding: 8px;
+    margin-right: 4px;
+  }
+  #input-button {
+    padding: 8px 12px;
+    font-size: 1em;
+  }
+  ul {
+    margin-top: 12px;
+  }
+  li {
+    padding: 10px 8px;
+    font-size: 0.98em;
+    border-radius: 10px;
+  }
+  .edit-btn, .delete-btn {
+    padding: 6px 10px;
+    font-size: 0.95em;
+    border-radius: 6px;
+  }
+  .counter-container {
+    font-size: 0.95em;
+    padding: 6px 2px;
+  }
+}
 
 #header {
   margin: 5px;
