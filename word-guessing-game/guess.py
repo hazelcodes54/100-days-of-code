@@ -1,32 +1,69 @@
 import random
 
-word_bank = ['pineapple', 'skibidi', 'love', 'ohio', 'tricks']
-word = random.choice(word_bank)
+# Word banks for different difficulty levels
+easy_words = ['cat', 'dog', 'sun', 'moon', 'star', 'tree', 'fish', 'bird']
+medium_words = ['pineapple', 'skibidi', 'love', 'ohio', 'tricks', 'guitar', 'coffee', 'banana']
+hard_words = ['encyclopedia', 'rhinoceros', 'kaleidoscope', 'Mediterranean', 'extraordinary', 'philosophical']
 
+# Let player choose difficulty
+print('Welcome to the Word Guessing Game!')
+print('\nChoose your difficulty level:')
+print('1. Easy (short words, 12 attempts)')
+print('2. Medium (medium words, 10 attempts)')
+print('3. Hard (long words, 8 attempts)')
+
+difficulty = input('\nEnter 1, 2, or 3: ')
+
+# Set word bank and attempts based on difficulty
+if difficulty == '1':
+    word_bank = easy_words
+    attempts = 12
+    print('\nYou chose Easy mode!')
+elif difficulty == '3':
+    word_bank = hard_words
+    attempts = 8
+    print('\nYou chose Hard mode!')
+else:
+    word_bank = medium_words
+    attempts = 10
+    print('\nYou chose Medium mode!')
+
+word = random.choice(word_bank)
 guessedWord = ['_'] * len(word)
-attempts = 10
+guessed_letters = []
 
 #we need to create a while loop so that the player can have multiple guesses
 
 while attempts > 0:
   print('\nCurrent word: ' + ' '.join(guessedWord))
+  if guessed_letters:
+    print('Guessed letters: ' + ', '.join(guessed_letters))
+  print('Attempts remaining: ' + str(attempts))
 
-guess = input('Guess a letter: ').lower()
+  guess = input('\nGuess a letter: ').lower()
 
-if guess in word:
-  for i in range(len(word)):
-    if word[i] == guess:
-      guessedWord[i] = guess
+  # Check if already guessed
+  if guess in guessed_letters:
+    print('You already guessed that letter!')
+    continue
+
+  guessed_letters.append(guess)
+
+  if guess in word:
+    for i in range(len(word)):
+      if word[i] == guess:
+        guessedWord[i] = guess
     print('Great guess!')
 
   else:
     attempts -= 1
     print('Wrong guess! Attempts left: ' + str(attempts))
 
-    #we need a condition that results in a loss for the player when they run out of attempts and reveal the correct word. 
+  #we need a condition that results in a loss for the player when they run out of attempts and reveal the correct word. 
   
   if '_' not in guessedWord:
-    print('\nCongratulations!! You guessed the word: ' + word) 
+    print('\nCongratulations!! You guessed the word: ' + word)
+    break
     
 if attempts == 0 and '_' in guessedWord:
   print('\nYou\'ve run out of attempts! The word was: ' + word)
