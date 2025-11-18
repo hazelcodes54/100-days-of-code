@@ -11,6 +11,8 @@ body {
   font-family: 'Segoe UI', Arial, sans-serif;
   text-align: center;
   margin-top: 50px;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 
@@ -103,14 +105,23 @@ h1 {
   text-shadow: 1px 2px 8px #fff6e0;
 }
 
+#todo-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 
 
 #input-box {
-  width: 220px;
+  flex: 1;
+  min-width: 180px;
   padding: 10px;
   border: 2px solid #f7c6b7;
   border-radius: 12px;
-  margin-right: 8px;
+  margin-right: 0;
   font-size: 1.1em;
   background: #fff6e0;
   transition: border-color 0.3s;
@@ -118,6 +129,25 @@ h1 {
 
 
 #input-box:focus {
+  border-color: #f7c6b7;
+  outline: none;
+}
+
+#priority-select {
+  padding: 10px;
+  border: 2px solid #f7c6b7;
+  border-radius: 12px;
+  margin-right: 0;
+  font-size: 1.1em;
+  background: #fff6e0;
+  color: #6d4c41;
+  cursor: pointer;
+  font-weight: 600;
+  transition: border-color 0.3s;
+  min-width: 100px;
+}
+
+#priority-select:focus {
   border-color: #f7c6b7;
   outline: none;
 }
@@ -238,4 +268,45 @@ li {
 .completed {
   border: 2px solid #ffe082;
   background: #f0f0f0;
+}
+
+/* Priority Badge Styling */
+.priority-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 700;
+  margin-right: 10px;
+  margin-left: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priority-badge.high {
+  background: #e57373;
+  color: #fff;
+}
+
+.priority-badge.medium {
+  background: #ffe082;
+  color: #6d4c41;
+}
+
+.priority-badge.low {
+  background: #a5d6a7;
+  color: #fff;
+}
+
+/* Priority border colors */
+li.priority-high {
+  border-left: 6px solid #e57373;
+}
+
+li.priority-medium {
+  border-left: 6px solid #ffe082;
+}
+
+li.priority-low {
+  border-left: 6px solid #a5d6a7;
 }
