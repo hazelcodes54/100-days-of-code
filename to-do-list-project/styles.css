@@ -152,6 +152,25 @@ h1 {
   outline: none;
 }
 
+#due-date-input {
+  padding: 10px;
+  border: 2px solid #f7c6b7;
+  border-radius: 12px;
+  margin-right: 0;
+  font-size: 1.1em;
+  background: #fff6e0;
+  color: #6d4c41;
+  cursor: pointer;
+  font-weight: 600;
+  transition: border-color 0.3s;
+  min-width: 140px;
+}
+
+#due-date-input:focus {
+  border-color: #f7c6b7;
+  outline: none;
+}
+
 
 
 #input-button {
@@ -309,4 +328,24 @@ li.priority-medium {
 
 li.priority-low {
   border-left: 6px solid #a5d6a7;
+}
+
+/* Due date styling */
+.due-date {
+  font-size: 0.9em;
+  color: #6d4c41;
+  margin-right: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Overdue task styling */
+li.overdue {
+  background: #ffebee !important;
+  border-color: #e57373 !important;
+}
+
+li.overdue .due-date {
+  color: #c62828;
+  font-weight: 700;
 }
