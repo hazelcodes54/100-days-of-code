@@ -9,6 +9,17 @@ def get_meme():
   json_data = json.loads(response.text)  # Parse the JSON response
   return json_data['url']  # Return the meme image URL
 
+# Function to get a random joke from JokeAPI
+def get_joke():
+  response = requests.get('https://v2.jokeapi.dev/joke/Any?safe-mode')  # Make a GET request to the joke API
+  json_data = json.loads(response.text)  # Parse the JSON response
+  
+  # Check if it's a two-part joke (setup and delivery) or a single joke
+  if json_data['type'] == 'twopart':
+    return f"{json_data['setup']}\n\n{json_data['delivery']}"
+  else:
+    return json_data['joke']
+
 # Create a custom Discord client by subclassing discord.Client
 class MyClient(discord.Client):
   # This function runs when the bot has connected to Discord
@@ -23,6 +34,9 @@ class MyClient(discord.Client):
     # If the message starts with $meme, send a meme in the channel
     if message.content.startswith('$meme'):
       await message.channel.send(get_meme())
+    # If the message starts with $joke, send a random joke
+    if message.content.startswith('$joke'):
+      await message.channel.send(get_joke())
 
 # Set up the bot's permissions (intents)
 intents = discord.Intents.default()  # Start with default permissions
