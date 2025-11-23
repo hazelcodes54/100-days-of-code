@@ -20,6 +20,18 @@ def get_joke():
   else:
     return json_data['joke']
 
+# Function to get a random dog picture
+def get_dog():
+  response = requests.get('https://dog.ceo/api/breeds/image/random')  # Make a GET request to the dog API
+  json_data = json.loads(response.text)  # Parse the JSON response
+  return json_data['message']  # Return the dog image URL
+
+# Function to get a random cat picture
+def get_cat():
+  response = requests.get('https://api.thecatapi.com/v1/images/search')  # Make a GET request to the cat API
+  json_data = json.loads(response.text)  # Parse the JSON response
+  return json_data[0]['url']  # Return the cat image URL
+
 # Create a custom Discord client by subclassing discord.Client
 class MyClient(discord.Client):
   # This function runs when the bot has connected to Discord
@@ -37,6 +49,12 @@ class MyClient(discord.Client):
     # If the message starts with $joke, send a random joke
     if message.content.startswith('$joke'):
       await message.channel.send(get_joke())
+    # If the message starts with $dog, send a random dog picture
+    if message.content.startswith('$dog'):
+      await message.channel.send(get_dog())
+    # If the message starts with $cat, send a random cat picture
+    if message.content.startswith('$cat'):
+      await message.channel.send(get_cat())
 
 # Set up the bot's permissions (intents)
 intents = discord.Intents.default()  # Start with default permissions
