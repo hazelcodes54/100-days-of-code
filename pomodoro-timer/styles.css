@@ -1,36 +1,79 @@
 * { box-sizing: border-box; }
+:root{
+  --bg-start:#f6d365;
+  --bg-end:#fda085;
+  --work:#ff4d4d;
+  --break:#2ecc71;
+  --muted:#6b6b6b;
+}
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-  background: linear-gradient(135deg,#f6d365 0%,#fda085 100%);
+  background: linear-gradient(135deg,var(--bg-start) 0%,var(--bg-end) 100%);
 }
 #app {
-  background: rgba(255,255,255,0.95);
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,245,245,0.95));
   padding: 28px 32px;
   border-radius: 12px;
   width: 360px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.08);
   text-align: center;
 }
-h1 { margin-top: 0; }
+#app h1 { margin-top: 0; font-weight:700; color:#333; }
 #timer-container { margin: 14px 0; }
-#mode { font-size: 14px; color: #4b4b4b; margin-bottom: 6px; }
+#mode { font-size: 14px; color: var(--muted); margin-bottom: 6px; }
 #display { font-size: 48px; font-weight: 700; color: #333; margin-bottom: 12px; }
-#controls button { margin: 0 6px; padding: 8px 14px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; }
-#start-btn { background: #2ecc71; color: white; }
-#pause-btn { background: #f1c40f; color: white; }
-#reset-btn { background: #e74c3c; color: white; }
+#display.small { font-size: 36px; }
+/* Progress & display */
+.progress-wrap { position: relative; width: 240px; height: 240px; margin: 6px auto 14px; }
+.progress-wrap svg { transform: translateY(0); display:block; }
+#display { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+#controls { display:flex; gap:12px; justify-content:center; align-items:center; margin-top:8px; width:100%; max-width:320px; margin-left:auto; margin-right:auto; }
+#controls button { flex: 1 1 auto; min-width: 86px; padding: 10px 12px; border-radius: 10px; border: none; cursor: pointer; font-weight: 700; box-shadow: 0 6px 18px rgba(0,0,0,0.08); box-sizing: border-box; }
+#start-btn { background: linear-gradient(135deg,var(--break),#27b869); color: white; }
+#pause-btn { background: linear-gradient(135deg,#f9d976,#f39c12); color: white; }
+#reset-btn { background: linear-gradient(135deg,#ff8a80,#ff5252); color: white; }
 #settings { display: flex; justify-content: space-between; gap: 8px; margin-top: 12px; }
 #settings label { display:flex; flex-direction: column; font-size: 12px; color: #444; flex: 1; }
 #settings input[type="number"] { padding: 8px; border-radius: 6px; border: 1px solid #ddd; margin-top: 6px; }
-#notes { margin-top: 14px; font-size: 12px; color: #6b6b6b; }
+#task-field { margin-top: 10px; }
+#task-field input { width:100%; padding:8px 10px; border-radius:8px;border:1px solid #eee; }
+#notes { margin-top: 14px; font-size: 12px; color: var(--muted); }
+
+/* Work/break colors applied to the progress ring */
+svg #progress-circle { transition: stroke 0.3s ease; }
+.work-mode svg #progress-circle { stroke: var(--work); }
+.break-mode svg #progress-circle { stroke: var(--break); }
+
+/* Running pulse */
+.running {
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  transform-origin: center;
+  animation: subtleFloat 4s ease-in-out infinite;
+}
+
+@keyframes subtleFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0px); }
+}
+
+.progress-wrap { filter: drop-shadow(0 8px 14px rgba(0,0,0,0.08)); }
+svg #progress-circle { transition: stroke-dashoffset 0.6s linear, stroke 0.3s ease; }
 
 /* Overly simple responsive tweaks */
 @media (max-width: 420px) {
   #app { width: 92vw; }
-  #display { font-size: 36px; }
+  #display { font-size: 34px; }
+  .progress-wrap { width: 180px; height: 180px; }
+  /* Stack controls under the progress circle to conserve horizontal space */
+  #controls { gap: 8px; flex-direction: column; width: 95%; max-width: 260px; }
+  #controls button { padding: 10px; font-size: 14px; width:100%; }
 }
+
+/* Overly simple responsive tweaks */
+/* Duplicate media block removed: contained earlier */
