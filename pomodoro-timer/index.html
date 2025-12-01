@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pomodoro Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -11,7 +12,14 @@
       <h1>Pomodoro Timer</h1>
       <div id="timer-container">
         <div id="mode">Work</div>
-        <div id="display">25:00</div>
+        <div class="progress-wrap">
+          <!-- SVG circular progress ring -->
+          <svg id="progress-ring" width="240" height="240" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="54" stroke="#eee" stroke-width="12" fill="none"></circle>
+            <circle id="progress-circle" cx="60" cy="60" r="54" stroke="#ff4d4d" stroke-width="12" stroke-linecap="round" fill="none" transform="rotate(-90 60 60)" stroke-dasharray="339.292" stroke-dashoffset="0"></circle>
+          </svg>
+          <div id="display">25:00</div>
+        </div>
         <div id="controls">
           <button id="start-btn">Start</button>
           <button id="pause-btn">Pause</button>
@@ -28,13 +36,17 @@
           Break (min)
           <input id="break-duration" type="number" min="1" value="5">
         </label>
-        <label>
+        <label class="auto-switch-label">
           Auto-switch
           <input id="auto-switch" type="checkbox">
         </label>
       </div>
 
-      <div id="notes">Tip: Use the Pomodoro method — focused work bursts with short breaks.</div>
+      <div id="task-field">
+        <label for="current-task">Current Task</label>
+        <input id="current-task" type="text" placeholder="What are you working on?">
+      </div>
+      <div id="notes">Tip: Use the Pomodoro method — focused work bursts with short breaks. (Keyboard shortcuts: Space to toggle, Enter to start, R to reset)</div>
 
       <audio id="bell-sound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" preload="auto"></audio>
     </div>
