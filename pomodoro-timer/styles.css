@@ -57,6 +57,40 @@ svg #progress-circle { transition: stroke 0.3s ease; }
 .work-mode svg #progress-circle { stroke: var(--work); }
 .break-mode svg #progress-circle { stroke: var(--break); }
 
+/* Theme Toggle Styles */
+#theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+#themeSwitch {
+  margin-left: 0.5rem;
+  transform: scale(1.2);
+}
+
+/* Light Theme (default) */
+:root {
+  --bg-color: #f5f5f5;
+  --text-color: #222;
+  --accent-color: #e57373;
+  --timer-bg: #fff;
+}
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Dark Theme */
+body.dark-theme {
+  --bg-color: #181818;
+  --text-color: #f5f5f5;
+  --accent-color: #90caf9;
+  --timer-bg: #222;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
 /* Running pulse */
 .running {
   box-shadow: 0 12px 30px rgba(0,0,0,0.12);
