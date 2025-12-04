@@ -1,3 +1,4 @@
+
 from dotenv import load_dotenv
 import os
 import random
@@ -7,24 +8,28 @@ from email.mime.text import MIMEText
 from email.header import Header
 from email.utils import formataddr
 
+# Set your Secret Santa budget range here
+BUDGET_RANGE = "$10–$20"
+
 load_dotenv()
 
 
 def send_email(sender, receiver, recipient):
-    password = os.environ['password']
-    subject = 'Your Secret Santa Present'
-    body = f"""
+  password = os.environ['password']
+  subject = 'Your Secret Santa Present'
+  body = f"""
 Hi! Your secret santa is: {recipient}! 🎅
-Remember to spend 10$-20$ on your gift, but don't stress about it being the perfect gift!
+This year, the suggested budget range is {BUDGET_RANGE} for your gift.
+Don't stress about it being the perfect gift—have fun!
 """
-    msg = MIMEText(body, 'plain', 'utf-8')
-    msg['Subject'] = Header(subject, 'utf-8')
-    msg['From'] = formataddr(('Secret Santa', sender))
-    msg['To'] = receiver
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as server:
-        server.login(sender, password)
-        server.sendmail(sender, receiver, msg.as_string())
+  msg = MIMEText(body, 'plain', 'utf-8')
+  msg['Subject'] = Header(subject, 'utf-8')
+  msg['From'] = formataddr(('Secret Santa', sender))
+  msg['To'] = receiver
+  context = ssl.create_default_context()
+  with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as server:
+    server.login(sender, password)
+    server.sendmail(sender, receiver, msg.as_string())
 
 
 names_and_emails = [
